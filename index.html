@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TODO List</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<section class="box">
+    <h2>To-Do List <img src="to-do-list.png" alt="list"></h2>
+
+    <div class="row">
+      <input id="new" type="text" placeholder="New task…" />
+      <button id="addTodo">Add</button>
+    </div>
+
+    <div class="filters">
+      <button id="f-all" class="is-active" aria-pressed="true">All</button>
+      <button id="f-active" aria-pressed="false">Active</button>
+      <button id="f-done" aria-pressed="false">Completed</button>
+      <span id="counter" style="margin-left:auto;">0 items</span>
+    </div>
+
+    <ul id="todos"></ul>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
