@@ -17,25 +17,26 @@ body {
     width: 90%;
     max-width: 520px;
     margin: 0 auto;
-    border-radius: 12px;
+    border-radius: 7px;
     padding: 20px 16px;
     box-shadow: 0 2px 10px rgba(0,0,0,.06);
 }
 
 
 button {
+    width: 25%;
     padding: 10px 14px;
     border: 0;
-    border-radius: 10px;
+    border-radius: 6px;
     color: #111;
     font-weight: 600;
     cursor: pointer;
     background-color: #FAF1D9;
-  }
+}
 
 button:hover { 
     background-color: #F2DFAB;
-    transition:  1s;
+    transition:  0.5s;
 }
 
 button:disabled { 
@@ -47,7 +48,7 @@ input {
     width: 70%;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-radius: 12px;
+    border-radius: 7px;
     border: 1px solid;
 
 }
@@ -55,6 +56,8 @@ input {
 .row{
     margin-top: 30px;
     margin-bottom: 20px;
+    gap: 25px;
+    display:flex
 }
 
 
@@ -68,7 +71,7 @@ input {
 }
 .filters button {
     padding: 9px 30px;
-    border-radius: 8px;
+    border-radius: 7px;
     border: 1px solid #ddd;
     background: #fff;
 }
@@ -77,14 +80,14 @@ input {
     margin-top: 20px;
     margin-bottom: 20px;
     width: 100%;
+    gap: 25px;
 }
 .filters button{
     background-color: #FAF1D9;
-    margin-right: 20px;
-    margin-left: 20px;
+    border: 0;
 }
 
 .filters button:hover{
     background-color: #F2DFAB;
-    transition:  1s;
+    transition:  0.5s;
 }
