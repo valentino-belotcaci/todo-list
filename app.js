@@ -1,8 +1,9 @@
 let input = document.getElementById('new');
 const btn = document.getElementById('addTodo');
 const list = document.getElementById('todos');
+const counter = document.getElementById('counter');
 let text;// text of the input
-let A = [""]; //array of todos added
+let A = []; //array of todos added
 
 btn.addEventListener("click", (e) => {
     text = input.value.trim();
@@ -38,6 +39,8 @@ btn.addEventListener("click", (e) => {
             li.appendChild(del);
 
             list.appendChild(li);
+            counter.textContent = A.length + ' items';
+            console.log(counter.value);
         }
         else
             console.log("todo already added");
@@ -51,7 +54,8 @@ list.addEventListener('click', (e) => {
     if (e.target.matches('button.deleteBtn')) {
         const text = li.childNodes[1].textContent;
         const pos = A.indexOf(text);
-        A.splice(pos);
+        A.splice(pos, 1);
+        counter.textContent = A.length + ' items';
         li.remove();
     }
     //click on checkbox
