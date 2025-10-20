@@ -127,3 +127,7 @@ ul {
     text-decoration: line-through;
     color: gray;
 }
+
+.remove-li{
+    display: none;
+}
