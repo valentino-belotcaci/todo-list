@@ -2,6 +2,7 @@ const input = document.getElementById('new');
 const btn = document.getElementById('addTodo');
 const list = document.getElementById('todos');
 const counter = document.getElementById('counter');
+const prio = document.getElementById('choices');
 let text;// text of the input
 let A = []; //array of todos added
 
@@ -14,9 +15,19 @@ function addTodo(){
         let pos = A.indexOf(text);
 
         if (pos == -1){
+            
 
             A.push(text);
             const li = document.createElement('li');
+
+            //color based on priority
+            if(prio.value == 1)
+                li.classList.add('low-p');
+            else if (prio.value == 2)
+                li.classList.add('med-p');
+            else
+                li.classList.add('high-p');
+
             const check = document.createElement('input');
 
             check.type = "checkbox";
@@ -32,6 +43,18 @@ function addTodo(){
             span.textContent = text;
             li.appendChild(span);
 
+            const now = new Date();
+            const isoDate = now.toISOString();
+            li.setAttribute('data-date', isoDate);
+            const date = document.createElement('p');
+            const formattedDate = new Intl.DateTimeFormat("it-IT", {
+                dateStyle: "short",
+                timeStyle: "medium"
+              }).format(now);
+
+            date.textContent = formattedDate;
+            li.appendChild(date);
+
             const del = document.createElement('button');
             del.textContent = "x";
             del.classList.add('deleteBtn');
@@ -39,7 +62,6 @@ function addTodo(){
 
             list.appendChild(li);
             counter.textContent = A.length + ' items';
-            //console.log(counter.value);
             saveData();
         }
         else
@@ -212,22 +234,46 @@ function saveData(){
     Array.from(list.children).forEach(li => {
         const text = li.querySelector('span').textContent;
         const checked = li.querySelector('input[type="checkbox"]').checked;
-        todos.push({ text, checked });
+        const displayDate = li.querySelector('p').textContent;
+        const isoDate = li.getAttribute('data-date');
+        const prio = li.classList.contains('low-p') ? 1 :
+                    li.classList.contains('med-p') ? 2 : 3;
+        todos.push({ text, checked, date: isoDate, displayDate, prio });
     });
     localStorage.setItem("data", JSON.stringify(todos));
 }
 
+const date = document.getElementById('date');
+const priority = document.getElementById('priority');
 
-function showList(){
+function sortByDate(){
     const data = JSON.parse(localStorage.getItem("data")) || [];
+    data.sort((a, b) => new Date(b.date) - new Date(a.date));
+    return data;
+}
+
+function sortByPrio(){
+    const data = JSON.parse(localStorage.getItem("data")) || [];
+    data.sort((a, b) => b.prio - a.prio);
+    return data;
+}
+
+date.addEventListener("click", () => showList(sortByDate()));
+
+priority.addEventListener("click", () => showList(sortByPrio()));
+
+function showList(data = null){
+    const todos = data || JSON.parse(localStorage.getItem("data")) || []
     A = []; 
 
     list.innerHTML = ''; 
 
-    data.forEach(todo => {
+    todos.forEach(todo => {
         A.push(todo.text);
 
         const li = document.createElement('li');
+        li.setAttribute('data-date', todo.date);
+
         const check = document.createElement('input');
         check.type = "checkbox";
         check.checked = todo.checked;
@@ -235,12 +281,24 @@ function showList(){
         const span = document.createElement('span');
         span.textContent = todo.text;
 
+        const date = document.createElement('p');
+        date.textContent = todo.displayDate;
+
+        const prio = todo.prio;
+        if(prio == 1)
+            li.classList.add('low-p');
+        else if (prio == 2)
+            li.classList.add('med-p');
+        else
+            li.classList.add('high-p');
+
         const del = document.createElement('button');
         del.textContent = "x";
         del.classList.add('deleteBtn');
 
         li.appendChild(check);
         li.appendChild(span);
+        li.appendChild(date);
         li.appendChild(del);
 
         if (todo.checked) 

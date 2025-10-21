@@ -11,20 +11,30 @@
     <h2>To-Do List <img src="to-do-list.png" alt="list"></h2>
 
     <div class="row">
-      <input id="new" type="text" placeholder="New task…" />
-      <button id="addTodo">Add</button>
+        <input id="new" type="text" placeholder="New task…" />
+        <select id="choices">
+            <option value="1">Low</option>
+            <option value="2">Medium</option>
+            <option value="3">High</option>
+        </select>
+        <button id="addTodo">Add</button>
     </div>
 
     <div class="filters">
-      <button id="f-all" class="is-active" >All</button>
-      <button id="f-active">Active</button>
-      <button id="f-done">Completed</button>
-      <span id="counter">0 items</span>
+        <button id="f-all" class="is-active" >All</button>
+        <button id="f-active">Active</button>
+        <button id="f-done">Completed</button>
+        <span id="counter">0 items</span>
     </div>
 
     <div class="toggle">
         <button id="t-all" >Toggle all</button>
         <button id="u-all" >Remove completed tasks</button>
+    </div>
+
+    <div class="sort">
+        <button id="date" >Sort by date</button>
+        <button id="priority" >Sort by priority</button>
     </div>
 
     <ul id="todos"></ul>

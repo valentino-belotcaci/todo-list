@@ -30,6 +30,12 @@ body {
     width: 100%;
 }
 
+.toggle,
+.sort{
+    margin-top:15px;
+    margin-bottom: 15px;
+}
+
 
 .filters button, .row button {
     width: 25%;
@@ -42,12 +48,16 @@ body {
     background-color: #FAF1D9;
 }
 
-.filters button:hover, .row button:hover, .toggle button:hover { 
+.filters button:hover, 
+.row button:hover, 
+.toggle button:hover,
+.sort button:hover { 
     background-color: #F2DFAB;
     transition:  0.5s;
 }
 
-.toggle button{
+.toggle button,
+.sort button{
     width: 49%;
     padding: 10px 14px;
     border: 0;
@@ -92,7 +102,7 @@ input[type="checkbox"]{
 }
 
 .deleteBtn:hover{
-    background-color: #F2DFAB;
+    background-color: #DFDFDD;
 }
 
 .filters {
@@ -125,9 +135,23 @@ input[type="checkbox"]{
     transition:  0.5s;
 }
 
+.high-p{
+    border: solid 1px #FCBABA;
+    background-color: #FCBABA;
+}
+
+.low-p{
+    border: solid 1px #BAFCD4;
+    background-color: #BAFCD4;
+}
+
+.med-p{
+    border: solid 1px #F9E2AB;
+    background-color: #F9E2AB;
+}
+
 ul li {
     list-style-type: none;
-    border: solid 1px #F2DFAB;
     border-radius: 10px;
     padding: 10px;
     margin-top: 10px;
@@ -141,7 +165,7 @@ ul {
     padding: 0;
 }
 
-.checked{
+li.checked span:first-of-type {
     text-decoration: line-through;
     color: gray;
 }
@@ -155,4 +179,16 @@ li span {
     overflow-wrap: break-word;
     display: inline-block;
     width: 85%;
+}
+
+li p{
+    width:23%;
+}
+
+select {
+    padding: 5px 10px;
+    font-size: 13px;
+    border: 0;
+    border-radius: 4px;
+    background-color: #FAF1D9;
 }
