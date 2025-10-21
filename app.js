@@ -28,9 +28,9 @@ function addTodo(){
 
             li.appendChild(check);
 
-            const label = document.createElement('label');
-            label.textContent = text;
-            li.appendChild(label);
+            const span = document.createElement('span');
+            span.textContent = text;
+            li.appendChild(span);
 
             const del = document.createElement('button');
             del.textContent = "x";
@@ -65,11 +65,49 @@ input.addEventListener('keydown', (e) => {
     }
 });
 
+list.addEventListener('dblclick', (e) => {
+    if (e.target.tagName.toLowerCase() === 'span') {
+        const span = e.target;
+        const currText = span.textContent;
+
+        const input = document.createElement('input');
+        input.type = "text";
+        input.value = currText;
+        input.size = Math.max(1, currText.length);
+
+        span.replaceWith(input);
+        input.focus();
+
+        input.addEventListener('blur', () => {
+            const newText = input.value.trim();
+            const newSpan = document.createElement('span');
+            newSpan.textContent = newText;
+            input.replaceWith(newSpan);
+
+            // update array A
+            const li = newSpan.closest('li');
+            const oldText = A.find(t => t === currText);
+            const index = A.indexOf(oldText);
+            if (index !== -1) {
+                A[index] = newText;
+            }
+
+            saveData();
+        });
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                input.blur();
+            }
+        });
+    }
+});
+
 
 list.addEventListener('click', (e) => {
     const li = e.target.closest('li');
     if (e.target.matches('button.deleteBtn')) {
-        const text = li.querySelector('label').textContent;
+        const text = li.querySelector('span').textContent;
         const pos = A.indexOf(text);
         A.splice(pos, 1);
         counter.textContent = A.length + ' items';
@@ -133,7 +171,7 @@ completed.addEventListener("click", () => {
 function saveData(){
     const todos = [];
     Array.from(list.children).forEach(li => {
-        const text = li.querySelector('label').textContent;
+        const text = li.querySelector('span').textContent;
         const checked = li.querySelector('input[type="checkbox"]').checked;
         todos.push({ text, checked });
     });
@@ -155,15 +193,15 @@ function showList(){
         check.type = "checkbox";
         check.checked = todo.checked;
 
-        const label = document.createElement('label');
-        label.textContent = todo.text;
+        const span = document.createElement('span');
+        span.textContent = todo.text;
 
         const del = document.createElement('button');
         del.textContent = "x";
         del.classList.add('deleteBtn');
 
         li.appendChild(check);
-        li.appendChild(label);
+        li.appendChild(span);
         li.appendChild(del);
 
         if (todo.checked) 

@@ -131,3 +131,10 @@ ul {
 .remove-li{
     display: none;
 }
+
+li span {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    display: inline-block;
+    max-width: 85%;
+}
