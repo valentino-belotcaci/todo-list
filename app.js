@@ -135,11 +135,13 @@ list.addEventListener('click', (e) => {
         counter.textContent = A.length + ' items';
         li.remove();
         saveData();
+        return;
     }
     //click on checkbox
     if (e.target.matches('input[type="checkbox"]')) {
         li.classList.toggle('checked', e.target.checked);
         saveData();
+        return;
     }
     //click on li element
     const cb = li.querySelector('input[type="checkbox"]');
@@ -147,6 +149,7 @@ list.addEventListener('click', (e) => {
         cb.checked = !cb.checked;
         li.classList.toggle('checked', cb.checked);
         saveData();
+        return;
     }
   });
 
