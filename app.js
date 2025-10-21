@@ -168,6 +168,45 @@ completed.addEventListener("click", () => {
     counter.textContent = c + ' items';
 });
 
+const toggle = document.getElementById('t-all');
+
+toggle.addEventListener("click", () => {
+    const items = Array.from(list.children);
+    const allChecked = items.every(li => {
+        const cb = li.querySelector('input[type="checkbox"]');
+        return cb && cb.checked;
+    });
+
+    items.forEach(li => {
+        const cb = li.querySelector('input[type="checkbox"]');
+        if (cb) {
+            cb.checked = !allChecked;
+            if (cb.checked) {
+                li.classList.add('checked');
+            } else {
+                li.classList.remove('checked');
+            }
+        }
+    });
+
+    saveData();
+});
+
+const comp = document.getElementById('u-all');
+
+comp.addEventListener("click", () => {
+    Array.from(list.children).forEach(li => {
+        if(li.classList.contains('checked')){
+            li.remove();
+            const pos = A.indexOf(text);
+            A.splice(pos, 1);
+            counter.textContent = A.length + ' items';
+        }
+    })
+    saveData();
+
+});
+
 function saveData(){
     const todos = [];
     Array.from(list.children).forEach(li => {

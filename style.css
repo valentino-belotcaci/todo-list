@@ -26,6 +26,10 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,.06);
 }
 
+.toggle{
+    width: 100%;
+}
+
 
 .filters button, .row button {
     width: 25%;
@@ -38,9 +42,20 @@ body {
     background-color: #FAF1D9;
 }
 
-.filters button:hover, .row button:hover { 
+.filters button:hover, .row button:hover, .toggle button:hover { 
     background-color: #F2DFAB;
     transition:  0.5s;
+}
+
+.toggle button{
+    width: 49%;
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 6px;
+    color: #111;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #FAF1D9;
 }
 
 button:disabled { 
@@ -57,7 +72,7 @@ input[type="text"]{
 }
 
 input[type="checkbox"]{
-    margin-right: 10px;
+    margin: 0;
 }
 
 .row{
@@ -117,6 +132,9 @@ ul li {
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center; 
+    gap: 10px;
 }
 
 ul {
@@ -136,5 +154,5 @@ li span {
     word-break: break-word;
     overflow-wrap: break-word;
     display: inline-block;
-    max-width: 85%;
+    width: 85%;
 }
