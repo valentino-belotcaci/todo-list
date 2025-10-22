@@ -92,6 +92,7 @@ list.addEventListener('dblclick', (e) => {
     if (e.target.tagName.toLowerCase() === 'span') {
         const span = e.target;
         const currText = span.textContent;
+        
 
         const input = document.createElement('input');
         input.type = "text";
@@ -103,20 +104,27 @@ list.addEventListener('dblclick', (e) => {
 
         input.addEventListener('blur', () => {
             const newText = input.value.trim();
+        
+            // blank text or already added
+            if (newText.length === 0 || (A.includes(newText) && newText !== currText)) {
+                input.replaceWith(span);//replace old span
+                return;
+            }
+        
             const newSpan = document.createElement('span');
             newSpan.textContent = newText;
             input.replaceWith(newSpan);
-
+        
             // update array A
             const li = newSpan.closest('li');
-            const oldText = A.find(t => t === currText);
-            const index = A.indexOf(oldText);
+            const index = A.indexOf(currText);
             if (index !== -1) {
                 A[index] = newText;
             }
-
+        
             saveData();
         });
+        
 
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
