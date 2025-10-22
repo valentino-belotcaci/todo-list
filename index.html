@@ -8,7 +8,11 @@
 </head>
 <body>
 <section class="box">
-    <h2>To-Do List <img src="to-do-list.png" alt="list"></h2>
+    <div class="title-search">
+        <h2>To-Do List <img src="to-do-list.png" alt="list"></h2>
+        <img src="search.png" alt="search">
+        <input id="search" type="search" placeholder="Search by text or date/time"/>
+    </div>
 
     <div class="row">
         <input id="new" type="text" placeholder="New task…" />
@@ -20,13 +24,6 @@
         <button id="addTodo">Add</button>
     </div>
 
-    <div class="filters">
-        <button id="f-all" class="is-active" >All</button>
-        <button id="f-active">Active</button>
-        <button id="f-done">Completed</button>
-        <span id="counter">0 items</span>
-    </div>
-
     <div class="toggle">
         <button id="t-all" >Toggle all</button>
         <button id="u-all" >Remove completed tasks</button>
@@ -35,6 +32,13 @@
     <div class="sort">
         <button id="date" >Sort by date</button>
         <button id="priority" >Sort by priority</button>
+    </div>
+
+    <div class="filters">
+        <button id="f-all" class="is-active" >All</button>
+        <button id="f-active">Active</button>
+        <button id="f-done">Completed</button>
+        <span id="counter">0 items</span>
     </div>
 
     <ul id="todos"></ul>

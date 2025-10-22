@@ -232,6 +232,31 @@ comp.addEventListener("click", () => {
 
 });
 
+function search(e){
+
+    let c = 0;
+
+    const value = e.target.value.toLowerCase();
+
+    Array.from(list.children).forEach(li => {
+
+        const isVisible = li.querySelector('span').textContent.toLowerCase().includes(value) || 
+        li.querySelector('p').textContent.toLowerCase().includes(value);
+
+        
+        li.classList.toggle('search-li', !isVisible);
+
+        if (isVisible) {
+            c++;
+        }
+    })
+    counter.textContent = c + ' items';
+}
+
+const s = document.getElementById('search');
+
+s.addEventListener("input", (e) => search(e));
+
 function saveData(){
     const todos = [];
     Array.from(list.children).forEach(li => {
