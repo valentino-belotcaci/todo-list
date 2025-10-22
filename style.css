@@ -159,6 +159,7 @@ ul li {
     display: flex;
     align-items: center; 
     gap: 10px;
+    cursor: grab;
 }
 
 ul {
@@ -219,4 +220,9 @@ select {
     margin-top: 35px;
     margin-right:10px;
     cursor: pointer;
+}
+
+.over{
+    background-color: #eaeaea;
+    border: 2px dashed #aaa;
 }

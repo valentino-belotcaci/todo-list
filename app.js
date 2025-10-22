@@ -63,6 +63,7 @@ function addTodo(){
             list.appendChild(li);
             counter.textContent = A.length + ' items';
             saveData();
+            addEventListeners();
         }
         else
             console.log("todo already added");
@@ -144,13 +145,14 @@ list.addEventListener('click', (e) => {
         return;
     }
     //click on li element
-    const cb = li.querySelector('input[type="checkbox"]');
-    if (cb) {
+    if (e.target.matches('span')) {
+        const cb = li.querySelector('input[type="checkbox"]');
         cb.checked = !cb.checked;
         li.classList.toggle('checked', cb.checked);
         saveData();
         return;
     }
+    
   });
 
 
@@ -240,8 +242,8 @@ function search(e){
 
     Array.from(list.children).forEach(li => {
 
-        const isVisible = li.querySelector('span').textContent.toLowerCase().includes(value) || 
-        li.querySelector('p').textContent.toLowerCase().includes(value);
+        const isVisible = li.querySelector('span').textContent.trim().toLowerCase().includes(value) || 
+        li.querySelector('p').textContent.trim().toLowerCase().includes(value);
 
         
         li.classList.toggle('search-li', !isVisible);
@@ -256,6 +258,79 @@ function search(e){
 const s = document.getElementById('search');
 
 s.addEventListener("input", (e) => search(e));
+
+
+
+let dragStartIndex;
+
+function dragStart(e) {
+    dragStartIndex = [...list.children].indexOf(this);
+    //console.log("dragStartIndex:", dragStartIndex);
+}
+
+
+function dragOver(e) {
+    e.preventDefault();
+}
+
+function dragEnter(e) {
+    e.preventDefault();
+    this.classList.add('over');
+}
+
+function dragLeave() {
+    this.classList.remove('over');
+}
+
+function dragDrop() {
+    const dragEndIndex = [...list.children].indexOf(this);
+    //console.log("dragEndIndex:", dragEndIndex);
+
+    swapItems(dragStartIndex, dragEndIndex); // swap in localStorage
+
+    showList(); 
+    this.classList.remove('over');
+}
+
+
+function swapItems(fromIndex, toIndex){
+    const data = JSON.parse(localStorage.getItem("data")) || [];
+
+    //console.log("Swapping", fromIndex, "with", toIndex);
+
+    const temp = data[fromIndex];
+    data[fromIndex] = data[toIndex];
+    data[toIndex] = temp;
+
+    //console.log("After swap:", data.map(t => t.text));
+
+    localStorage.setItem("data", JSON.stringify(data));
+}
+
+function dragEnter(e) {
+    e.preventDefault();
+    this.classList.add('over');
+    
+}
+
+function dragLeave() {
+    this.classList.remove('over');
+}
+
+
+function addEventListeners(){
+    Array.from(list.children).forEach(li => {
+        li.setAttribute('draggable', 'true');
+
+        li.addEventListener('dragstart', dragStart);
+        li.addEventListener('dragover', dragOver);
+        li.addEventListener('drop', dragDrop);
+        li.addEventListener('dragenter', dragEnter);
+        li.addEventListener('dragleave', dragLeave);
+    });
+}
+
+
 
 function saveData(){
     const todos = [];
@@ -334,7 +409,7 @@ function showList(data = null){
 
         list.appendChild(li);
     });
-
+    addEventListeners();
     counter.textContent = A.length + ' items';
 }
 
