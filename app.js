@@ -63,6 +63,7 @@ function addTodo(){
             list.appendChild(li);
             counter.textContent = A.length + ' items';
             saveData();
+            updateEmptyMessage()
             addEventListeners();
         }
         else
@@ -143,6 +144,7 @@ list.addEventListener('click', (e) => {
         A.splice(pos, 1);
         counter.textContent = A.length + ' items';
         li.remove();
+        updateEmptyMessage()
         saveData();
         return;
     }
@@ -171,6 +173,7 @@ all.addEventListener("click", () => {
         li.classList.remove('remove-li');
     })
     counter.textContent = A.length + ' items';
+    updateEmptyMessage();
 });
 
 const active = document.getElementById('f-active');
@@ -178,14 +181,17 @@ const active = document.getElementById('f-active');
 active.addEventListener("click", () => {
     let c = 0;
     Array.from(list.children).forEach(li => {
-        if (li.classList.contains('checked'))
+        if (li.classList.contains('checked')){
             li.classList.add('remove-li');
+            //updateEmptyMessage();
+        }
         else if (li.classList.contains('remove-li')){
             li.classList.remove('remove-li');
             c++;
         }else c++;
     })
     counter.textContent = c + ' items';
+    updateEmptyMessage();
 });
 
 const completed = document.getElementById('f-done');
@@ -193,14 +199,17 @@ const completed = document.getElementById('f-done');
 completed.addEventListener("click", () => {
     let c = 0;
     Array.from(list.children).forEach(li => {
-        if (!li.classList.contains('checked'))
+        if (!li.classList.contains('checked')){
             li.classList.add('remove-li');
+            //updateEmptyMessage();
+        }
         else if (li.classList.contains('remove-li')){
             li.classList.remove('remove-li');
             c++;
         }else c++;
     })
     counter.textContent = c + ' items';
+    updateEmptyMessage()
 });
 
 const toggle = document.getElementById('t-all');
@@ -233,6 +242,7 @@ comp.addEventListener("click", () => {
     Array.from(list.children).forEach(li => {
         if(li.classList.contains('checked')){
             li.remove();
+            updateEmptyMessage();
             const pos = A.indexOf(text);
             A.splice(pos, 1);
             counter.textContent = A.length + ' items';
@@ -261,6 +271,7 @@ function search(e){
         }
     })
     counter.textContent = c + ' items';
+    updateEmptyMessage();
 }
 
 const s = document.getElementById('search');
@@ -339,6 +350,12 @@ function addEventListeners(){
 }
 
 
+function updateEmptyMessage() {
+    const msg = document.getElementById('emptyMsg');
+    const count = parseInt(counter.textContent);
+    msg.style.display = (count === 0) ? 'block' : 'none';
+}
+
 
 function saveData(){
     const todos = [];
@@ -378,6 +395,7 @@ function showList(data = null){
     A = []; 
 
     list.innerHTML = ''; 
+    updateEmptyMessage();
 
     todos.forEach(todo => {
         A.push(todo.text);
@@ -418,6 +436,7 @@ function showList(data = null){
         list.appendChild(li);
     });
     addEventListeners();
+    updateEmptyMessage();
     counter.textContent = A.length + ' items';
 }
 
