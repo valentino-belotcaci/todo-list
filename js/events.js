@@ -108,6 +108,46 @@ export function registerEvents({
         }
     });
 
+    /**
+    * Handles double clicks within the list (<ul>).
+    * Modifies the current text of the task with a new one
+    * The new text must not be blank, and have a different text from all previous tasks added
+    */
+    list.addEventListener('dblclick', e => {
+        if (e.target.tagName.toLowerCase() === 'span') {
+        const span = e.target;
+        const oldText = span.textContent;
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = oldText;
+        input.size = Math.max(1, oldText.length);
+    
+        span.replaceWith(input);
+        input.focus();
+    
+        input.addEventListener('blur', () => {
+            const newText = input.value.trim();
+            if (!newText.length || todosArray.includes(newText)) {
+            input.replaceWith(span);
+            return;
+            }
+            span.textContent = newText;
+            input.replaceWith(span);
+    
+            // update array and save
+            const index = todosArray.indexOf(oldText);
+            if (index !== -1) todosArray[index] = newText;
+            saveData(list);
+        });
+    
+        input.addEventListener('keydown', e => {
+            if (e.key === 'Enter') input.blur();
+            if (e.key === 'Escape') input.replaceWith(span);
+        });
+        }
+    });
+  
+
     // --- FILTER BUTTONS (All / Active / Completed) ---
     const filterButtons = [allBtn, activeBtn, completedBtn];
 

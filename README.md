@@ -7,16 +7,21 @@ It lets users manage daily tasks with features like filtering, sorting, prioriti
 
 ## Features
 
-- Add, edit, and delete tasks  
-- Sort by **date** or **priority**  
-- Real-time **search** by text or date  
-- Filter: **All**, **Active**, **Completed**  
-- Toggle all tasks at once  
-- Remove all completed tasks  
-- LocalStorage persistence (tasks remain after reload)  
+- Add and delete tasks  
+- Inline text editing: double-click a task to rename it
+- Sort tasks by date or priority  
+- Real-time search by text or date  
+- Filter between All, Active, and Completed tasks  
+- Toggle all tasks as complete/incomplete  
+- Remove all completed tasks instantly  
+- LocalStorage persistence — tasks remain after reload  
 - Drag-and-drop task reordering  
-- Visual priority colors (Low, Medium, High)  
-- Active filter/sort highlighting  
+- Priority colors:  
+  - Low  
+  - Medium  
+  - High  
+- Active button highlighting for filters and sorting  
+
 
 ---
 
