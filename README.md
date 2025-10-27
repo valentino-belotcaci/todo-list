@@ -5,38 +5,18 @@ It lets users manage daily tasks with features like filtering, sorting, prioriti
 
 ---
 
-## 🚀 Features
+## Features
 
-- ✅ Add, edit, and delete tasks  
-- 📅 Sort by **date** or **priority**  
-- 🔍 Real-time **search** by text or date  
-- 🟢 Filter: **All**, **Active**, **Completed**  
-- 🔁 Toggle all tasks at once  
-- 🧹 Remove all completed tasks  
-- 📦 LocalStorage persistence (tasks remain after reload)  
-- ✋ Drag-and-drop task reordering  
-- 🎨 Visual priority colors (Low, Medium, High)  
-- 🟨 Active filter/sort highlighting  
-
----
-
-## 📂 Project Structure
-
-project/
-│
-├── index.html # Main HTML page
-├── style.css # UI design and layout
-│
-└── js/
-├── app.js # Entry point – initializes the app
-├── dom.js # DOM creation & rendering logic
-├── events.js # Handles all event listeners and UI interactions
-├── storage.js # localStorage read/write and sorting logic
-├── dragdrop.js # Drag & drop functionality
-└── utils.js # Helper utilities (date formatting, empty message)
-
-
-Each module has a single, well-defined responsibility to keep the code easy to read and maintain.
+- Add, edit, and delete tasks  
+- Sort by **date** or **priority**  
+- Real-time **search** by text or date  
+- Filter: **All**, **Active**, **Completed**  
+- Toggle all tasks at once  
+- Remove all completed tasks  
+- LocalStorage persistence (tasks remain after reload)  
+- Drag-and-drop task reordering  
+- Visual priority colors (Low, Medium, High)  
+- Active filter/sort highlighting  
 
 ---
 
@@ -51,7 +31,7 @@ Each module has a single, well-defined responsibility to keep the code easy to r
 
 ---
 
-## 🧩 Main Modules Overview
+## Main Modules Overview
 
 ### `app.js`
 - **Entry point** of the application.  
@@ -84,5 +64,5 @@ Each module has a single, well-defined responsibility to keep the code easy to r
   - Formats dates for the **Italian locale**.  
   - Shows or hides the **“empty list”** message based on the current task count.
 
-## 🧑‍💻 Author
+## Author
 Developed by **Valentino Belotcaci**  
